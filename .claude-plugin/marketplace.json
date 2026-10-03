@@ -1,0 +1,14 @@
+{
+  "name": "sighted",
+  "description": "Sighted を Claude で使うためのプラグイン",
+  "owner": {
+    "name": "tkbstore"
+  },
+  "plugins": [
+    {
+      "name": "sighted-stg",
+      "source": "./plugins/sighted-stg",
+      "description": "Sighted ステージング環境の分析と計測"
+    }
+  ]
+}

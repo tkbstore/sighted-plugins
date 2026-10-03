@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sighted-stg": {
+      "type": "http",
+      "url": "https://mcp.stg.sighted-aeo.com/mcp"
+    }
+  }
+}
