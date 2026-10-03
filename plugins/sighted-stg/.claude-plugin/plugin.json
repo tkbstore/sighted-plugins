@@ -1,0 +1,9 @@
+{
+  "name": "sighted-stg",
+  "displayName": "Sighted — Staging",
+  "version": "0.1.0",
+  "description": "Sighted のデータを分析し、費用を確認して計測を実行します。",
+  "author": {
+    "name": "tkbstore"
+  }
+}
