@@ -53,6 +53,6 @@ Sighted を AI エージェントから使うためのプラグインです。�
 ## 開発する人へ
 
 - 構成: `.claude-plugin/marketplace.json`（マーケットプレイス）と `plugins/sighted-stg/`（`.claude-plugin/plugin.json`・`.mcp.json`・`skills/sighted-analysis/SKILL.md`）。
-- 変更したら `claude plugin validate .` と `claude plugin validate ./plugins/sighted-stg` を通します。
+- 変更したら `claude plugin validate --strict .` と `claude plugin validate --strict ./plugins/sighted-stg` を通します。
 - `plugin.json` の `version` を上げないと、Claude Code に入れた人には更新が届きません。変更を出すたびに上げます。
 - skill は外部から手順を取りに行かない作りにします。手順はファイルに書いたことだけです。
