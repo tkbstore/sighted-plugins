@@ -36,7 +36,7 @@ claude plugin marketplace add tkbstore/sighted-plugins
 claude plugin install sighted-stg@sighted --scope user
 ```
 
-- CLI でプラグインを入れた直後はそのセッションにまだ読み込まれていないため、`/reload-plugins` → `/sighted-stg:sighted-setup` の順に打つと `sighted-setup` skill の手順で接続まで案内されます。
+- CLI でプラグインを入れた直後はそのセッションにまだ読み込まれていないため、`/reload-plugins` → `/sighted-stg:sighted-setup` の順に打つと `sighted-setup` skill の手順で接続まで案内されます。`/reload-plugins` が保留になったら `/reload-plugins --force` を打ってください。
 - `/plugin install` で開く画面で、インストールの範囲を選ぶこともできます（上のコマンドは `user` スコープ）。
 - `/mcp` で `plugin:sighted-stg:sighted-stg` を選び、ブラウザで Sighted にログインして同意します。
 - 同じ URL（`https://mcp.stg.sighted-aeo.com/mcp`）の MCP サーバーを手で追加していると、Claude Code はそちらを使い、プラグインのサーバーは重複として使いません。プラグイン経由で使うときは、手で追加したほうを外してください。

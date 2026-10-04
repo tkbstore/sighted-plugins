@@ -21,6 +21,8 @@ claude plugin marketplace add tkbstore/sighted-plugins
 claude plugin install sighted-stg@sighted --scope user
 ```
 
+`/reload-plugins` が保留になったら `/reload-plugins --force` を打ってください。
+
 接続したあと、たとえば次のように頼みます。
 
 - 「先週の AI の回答での露出と、Search Console の検索流入を比べて」
