@@ -28,15 +28,17 @@ Sighted を AI エージェントから使うためのプラグインです。�
 
 ### Claude Code
 
+次のプロンプトをそのまま貼ってください。
+
 ```text
-/plugin marketplace add tkbstore/sighted-plugins
-/plugin install sighted-stg@sighted
-/mcp
+Sighted を使えるようにして。次を実行してから、Sighted プラグインの接続の手順に従って最後まで案内して。
+claude plugin marketplace add tkbstore/sighted-plugins
+claude plugin install sighted-stg@sighted --scope user
 ```
 
-- `/plugin install` で開く画面で、インストールの範囲を選びます。
+- Claude がコマンドを実行し、続けて `sighted-setup` skill の手順で接続まで案内します。
+- `/plugin install` で開く画面で、インストールの範囲を選ぶこともできます（上のコマンドは `user` スコープ）。
 - `/mcp` で `plugin:sighted-stg:sighted-stg` を選び、ブラウザで Sighted にログインして同意します。
-- シェルからは `claude plugin marketplace add tkbstore/sighted-plugins` と `claude plugin install sighted-stg@sighted` でも入れられます。
 - 同じ URL（`https://mcp.stg.sighted-aeo.com/mcp`）の MCP サーバーを手で追加していると、Claude Code はそちらを使い、プラグインのサーバーは重複として使いません。プラグイン経由で使うときは、手で追加したほうを外してください。
 
 ### Sighted のアカウントが無いとき
@@ -52,7 +54,7 @@ Sighted を AI エージェントから使うためのプラグインです。�
 
 ## 開発する人へ
 
-- 構成: `.claude-plugin/marketplace.json`（マーケットプレイス）と `plugins/sighted-stg/`（`.claude-plugin/plugin.json`・`.mcp.json`・`skills/sighted-analysis/SKILL.md`）。
+- 構成: `.claude-plugin/marketplace.json`（マーケットプレイス）と `plugins/sighted-stg/`（`.claude-plugin/plugin.json`・`.mcp.json`・`skills/sighted-setup/SKILL.md`・`skills/sighted-analysis/SKILL.md`）。
 - 変更したら `claude plugin validate --strict .` と `claude plugin validate --strict ./plugins/sighted-stg` を通します。
 - `plugin.json` の `version` を上げないと、Claude Code に入れた人には更新が届きません。変更を出すたびに上げます。
 - skill は外部から手順を取りに行かない作りにします。手順はファイルに書いたことだけです。

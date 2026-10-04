@@ -22,7 +22,7 @@ Sighted の MCP サーバーのツールで、利用者のデータを分析し�
 - 接続先は Sighted の**ステージング環境（stg）**。見えるのは stg のアカウントのデータだけ。
 - 使えるのは、利用者が接続のときに同意画面で選んだ WS と連携先（Google Search Console・Google Analytics 4・Meta）の範囲だけ。
 - ツール名は、クライアントによって接頭辞が付いて見える。この文書では接頭辞を省いて書く。
-- Sighted のツールが見当たらないときは、まだ接続していない。claude.ai・Cowork ではこのプラグインの Connectors タブから接続、Claude Code では `/mcp` から認証してもらう。
+- Sighted のツールが見当たらないとき、または `Needs authentication` のときは、まだ接続していない。`sighted-setup` の手順に従う。Sighted のアカウントが無ければ https://stg.sighted-aeo.com/signup で登録してもらう。
 
 ## 2. WS と対象の選び方
 
