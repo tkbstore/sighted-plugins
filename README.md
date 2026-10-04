@@ -28,15 +28,15 @@ Sighted を AI エージェントから使うためのプラグインです。�
 
 ### Claude Code
 
-次のプロンプトをそのまま貼ってください。
+Sighted のアカウントが無ければ、先に https://stg.sighted-aeo.com/signup で登録し、ワークスペースの作成まで済ませてください。登録済みなら次のプロンプトをそのまま貼ってください。
 
 ```text
-Sighted を使えるようにして。次を実行してから、Sighted プラグインの接続の手順に従って最後まで案内して。
+Sighted を使えるようにして。次を実行してから、/reload-plugins → /sighted-stg:sighted-setup の順で打つよう伝えて（この会話でもう sighted-setup が使えるなら、それに従ってそのまま進めて）。
 claude plugin marketplace add tkbstore/sighted-plugins
 claude plugin install sighted-stg@sighted --scope user
 ```
 
-- Claude がコマンドを実行し、続けて `sighted-setup` skill の手順で接続まで案内します。
+- CLI でプラグインを入れた直後はそのセッションにまだ読み込まれていないため、`/reload-plugins` → `/sighted-stg:sighted-setup` の順に打つと `sighted-setup` skill の手順で接続まで案内されます。
 - `/plugin install` で開く画面で、インストールの範囲を選ぶこともできます（上のコマンドは `user` スコープ）。
 - `/mcp` で `plugin:sighted-stg:sighted-stg` を選び、ブラウザで Sighted にログインして同意します。
 - 同じ URL（`https://mcp.stg.sighted-aeo.com/mcp`）の MCP サーバーを手で追加していると、Claude Code はそちらを使い、プラグインのサーバーは重複として使いません。プラグイン経由で使うときは、手で追加したほうを外してください。

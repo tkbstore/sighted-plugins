@@ -13,10 +13,10 @@ claude.ai（Web・デスクトップ・モバイル）、Cowork、Claude Code �
 
 ## 使い方
 
-Claude Code では、次のプロンプトを貼るだけでインストールから接続の案内までを Claude が進めます。
+Claude Code では、Sighted のアカウントが無ければ先に https://stg.sighted-aeo.com/signup で登録してから、次のプロンプトを貼るだけでインストールから接続の案内までを Claude が進めます。
 
 ```text
-Sighted を使えるようにして。次を実行してから、Sighted プラグインの接続の手順に従って最後まで案内して。
+Sighted を使えるようにして。次を実行してから、/reload-plugins → /sighted-stg:sighted-setup の順で打つよう伝えて（この会話でもう sighted-setup が使えるなら、それに従ってそのまま進めて）。
 claude plugin marketplace add tkbstore/sighted-plugins
 claude plugin install sighted-stg@sighted --scope user
 ```

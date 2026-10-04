@@ -1,6 +1,6 @@
 ---
 name: sighted-analysis
-description: Sighted（AI の回答での露出を測る AEO サービス）のデータを分析し、計測クエリを実行するときの手順。Sighted の MCP ツール（list_workspaces・run_query など）を使う前に読む。AEO の計測結果（AI の回答での言及・引用）、Google Search Console・Google Analytics 4・Meta（Facebook・Instagram・Meta 広告）のデータの分析、計測の実行（run_query）、クレジットの見積もりと残高の確認、連携や同意が足りないときの案内に使う。Use before calling any Sighted MCP tool, and for Sighted data analysis, AEO results, GSC/GA4/Meta metrics, running Sighted queries, and Sighted credits.
+description: Sighted（AI の回答での露出を測る AEO サービス）のデータを分析し、計測クエリを実行するときの手順。Sighted の MCP ツール（list_workspaces・run_query など）を使う前に読む。AEO の計測結果（AI の回答での言及・引用）、Google Search Console・Google Analytics 4・Meta（Facebook・Instagram・Meta 広告）のデータの分析、計測の実行（run_query）、クレジットの見積もりと残高の確認、連携や同意が足りないときの案内に使う。接続・ログイン自体の案内は `sighted-setup` を使う。Use before calling any Sighted MCP tool, and for Sighted data analysis, AEO results, GSC/GA4/Meta metrics, running Sighted queries, and Sighted credits. For connecting or logging in to Sighted itself, use `sighted-setup`.
 ---
 
 # Sighted の分析と計測
