@@ -1,0 +1,80 @@
+name: check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  skill-copies:
+    name: skill の原稿とコピーの一致
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash .github/scripts/check-skill-copies.sh
+
+  manifests:
+    name: JSON・schema・案内・秘密の検査
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv run --no-project --with 'jsonschema==4.25.1' python .github/scripts/check-manifests.py
+
+  commit-authors:
+    name: commit の author/committer メール
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          set -o pipefail
+          git log --format='%H%x1f%ae%x1f%ce' \
+            "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}" \
+            | python3 .github/scripts/check-commit-authors.py
+
+  claude:
+    name: Claude のプラグインとして読める
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install -g @anthropic-ai/claude-code@2.1.280
+      - run: claude plugin validate --strict .
+      - run: claude plugin validate --strict ./plugins/sighted-stg
+
+  codex:
+    name: Codex のプラグインとして入れられる
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install -g @openai/codex@0.159.2
+      - name: 空の CODEX_HOME にこのリポジトリから入れる
+        run: |
+          export CODEX_HOME="$RUNNER_TEMP/codex-home"
+          mkdir -p "$CODEX_HOME"
+          codex plugin marketplace add "$GITHUB_WORKSPACE"
+          codex plugin add sighted-stg@sighted
+          codex mcp list --json > "$RUNNER_TEMP/mcp-list.json"
+      - name: プラグインの MCP サーバーが登録されている
+        run: |
+          python3 - "$RUNNER_TEMP/mcp-list.json" <<'EOF'
+          import json
+          import sys
+
+          servers = json.load(open(sys.argv[1], encoding="utf-8"))
+          urls = [s["transport"].get("url") for s in servers if s.get("enabled")]
+          print("登録された MCP サーバー:", urls)
+          if "https://mcp.stg.sighted-aeo.com/mcp" not in urls:
+              sys.exit("sighted-stg の MCP サーバーが登録されていません")
+          EOF

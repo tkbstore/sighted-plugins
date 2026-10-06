@@ -1,0 +1,19 @@
+{
+  "name": "sighted",
+  "interface": {
+    "displayName": "Sighted"
+  },
+  "plugins": [
+    {
+      "name": "sighted-stg",
+      "source": {
+        "source": "local",
+        "path": "./plugins/sighted-stg-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      }
+    }
+  ]
+}
