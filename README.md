@@ -55,12 +55,12 @@ codex plugin add sighted-stg@sighted
 「sighted-stg の sighted-setup に従って Sighted に接続して」
 と送るよう案内して。この会話ですでにその skill と MCP が使える場合は、
 その setup に従って続けて。
-ブラウザでのログインと提供の同意は私が行う。接続後は WS 一覧で確かめて。
+codex mcp login の実行は Codex が自分で行ってよい。ブラウザでのログインと同意の提供は私が行う。接続後は WS 一覧で確かめて。
 このセットアップだけで計測を実行しない。
 ```
 
 - プラグインを入れた直後の会話には、プラグインの skill と MCP サーバーがまだ読み込まれていません。新しい会話で `sighted-setup` の手順に従うと、接続まで案内されます。
-- ログインは自分のターミナルで `codex mcp login <サーバーの名前>` を実行し、ブラウザで Sighted にログインして同意します。サーバーの名前は `/mcp` か `codex mcp list` に出る名前で、`sighted-setup` が確かめて案内します。client ID の入力は要りません。
+- ログインは Codex が `codex mcp login <サーバーの名前>` を自分で実行し、開いたブラウザで Sighted にログインして同意します（サーバーの名前は `/mcp` か `codex mcp list` に出る名前で、`sighted-setup` が確かめて案内します。client ID の入力は要りません）。サンドボックス等でコマンドが実行できないときは、Codex が昇格した権限での実行を求めるか、自分のターミナルで実行する案内に切り替えます。
 - 同じ URL（`https://mcp.stg.sighted-aeo.com/mcp`）の MCP サーバーを手で追加していると、プラグインのサーバーとは別の接続として並びます。名前が同じときは、手で追加したほうだけが使われます（codex-cli 0.159.2 で確認済み。保存元がグローバル（`~/.codex/config.toml`）でも、trusted なプロジェクトの `.codex/config.toml` でも同じ）。グローバルに追加したものは `codex mcp remove <名前>` で外せますが、**プロジェクトの `.codex/config.toml` に書いたものはこのコマンドでは外れません**（終了コードは 0 のまま何も変わりません）。その場合はプロジェクトの `.codex/config.toml` を開き、該当の `[mcp_servers.<名前>]` を手で削除してください。詳しくは `sighted-setup` の案内に従ってください。
 - 計測の実行の前には、会話の中で見積もりを見せて確認を取ります。Codex が実行の許可を求める画面を出すかどうかは、Codex の承認の設定で決まります。プラグインはこの設定を変えません。設定例（`~/.codex/config.toml`。`approval_policy`・`approvals_reviewer` は codex-cli 0.159.2 で確認済みのキー）:
 
