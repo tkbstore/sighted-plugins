@@ -8,8 +8,8 @@ claude.ai（Web・デスクトップ・モバイル）、Cowork、Claude Code �
 | ファイル | 役割 |
 | --- | --- |
 | `.mcp.json` | Sighted の MCP サーバー `https://mcp.stg.sighted-aeo.com/mcp` への接続。ログインは OAuth で、client ID の入力は要りません |
-| `skills/sighted-setup/SKILL.md` | Claude が従う手順。接続・ログインの案内、重複する MCP サーバーの整理、`Needs authentication` の扱い |
-| `skills/sighted-analysis/SKILL.md` | Claude が従う手順。ワークスペースの選び方、データの取り方と数字の読み方、計測の実行前の確認、足りないときの案内、Meta 広告データの利用制限 |
+| `skills/sighted-setup/SKILL.md` | Claude が従う手順。接続・ログイン・接続し直しの案内、重複する MCP サーバーの整理、`Needs authentication` の扱い。原稿は `skills-src/claude/sighted-setup/` |
+| `skills/sighted-analysis/SKILL.md` | Claude が従う手順。ワークスペースの選び方、データの取り方と数字の読み方、計測の実行前の確認、足りないときの案内、Meta 広告データの利用制限。原稿は `skills-src/sighted-analysis/`（Codex 用と共通） |
 
 ## 使い方
 
