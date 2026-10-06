@@ -39,8 +39,6 @@ jobs:
   codex:
     name: Codex のプラグインとして入れられる
     runs-on: ubuntu-latest
-    env:
-      CODEX_HOME: ${{ runner.temp }}/codex-home
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -49,6 +47,7 @@ jobs:
       - run: npm install -g @openai/codex@0.159.2
       - name: 空の CODEX_HOME にこのリポジトリから入れる
         run: |
+          export CODEX_HOME="$RUNNER_TEMP/codex-home"
           mkdir -p "$CODEX_HOME"
           codex plugin marketplace add "$GITHUB_WORKSPACE"
           codex plugin add sighted-stg@sighted
