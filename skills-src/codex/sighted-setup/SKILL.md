@@ -29,12 +29,25 @@ Sighted のアカウントが無ければ、先に `<入口>/signup` で登録�
 
 ### 同じ URL のサーバーが重なっているとき
 
-手で追加した MCP サーバー（`codex mcp add` や `config.toml` の `[mcp_servers.<名前>]`）は、プラグインのサーバーとは別に並ぶ。Sighted の URL を指すサーバーが二つ以上あると、それぞれが別の接続になり、ログインと同意も別々になる。
+手で追加した MCP サーバーは、保存元によって片付け方が違う（codex-cli 0.159.2 で確認済み）。
 
-1. Sighted の URL を指すサーバーの名前と URL を利用者に見せ、手で追加したほうを外すか聞く。手で追加したものは `~/.codex/config.toml`（またはプロジェクトの `.codex/config.toml`）の `[mcp_servers.<名前>]` にある。プラグインのサーバーはそこには書かれていない。
-2. 手で追加したサーバーの名前がプラグインのサーバーと同じだと、プラグインのサーバーは一覧に出ず、手で追加したほうだけが使われる。この場合も 1 と同じく利用者に見せて聞く。
-3. 外してよいと言われたときだけ、`codex mcp remove "<名前>"` で外す（勝手に消さない）。Codex から実行できなければ、利用者に自分のターミナルで実行してもらう。このコマンドで外れるのは手で追加したものだけで、プラグインのサーバーは外れない。
-4. **外したら、設定が変わっている。** Codex を起動し直して新しい会話を始め、「sighted-stg の sighted-setup に従って Sighted に接続して」と送るよう伝え、**ここで一旦止める**。この後の手順は、その新しい会話で続ける。
+| 保存元 | 見つかる場所 | `codex mcp list`／`get` に出るか | 同名のときの優先 | 外すコマンド |
+| --- | --- | --- | --- | --- |
+| グローバル（手で `codex mcp add` した分） | `$CODEX_HOME/config.toml`（既定 `~/.codex/config.toml`）の `[mcp_servers.<名前>]` | 出る | プラグインより優先 | `codex mcp remove "<名前>"` で外れる |
+| プロジェクト（手で `.codex/config.toml` に書いた分） | そのプロジェクトの `.codex/config.toml` の `[mcp_servers.<名前>]` | **そのプロジェクトを Codex が trusted にしているときだけ**出る（untrusted だと無視される） | trusted なら**プラグインより優先**（グローバルと同格） | `codex mcp remove` では**外れない**（後述） |
+| プラグイン（`codex plugin add` で入れた分） | `config.toml` の `[plugins."<plugin>@<marketplace>"]`（`mcp_servers` ではない） | 出る（グローバル・プロジェクトに同名が無いときだけ） | 最も低い | `codex plugin remove "<plugin>@<marketplace>"` |
+
+1. Sighted の URL を指すサーバーの名前と URL を利用者に見せ、手で追加したほうを外すか聞く。`codex mcp list` の `Name`／`Url` で見つける。
+2. **重なる場所によって見え方が違う**。
+   - グローバルに手で追加した名前がプラグインのサーバーと同じだと、`codex mcp list` にはプラグインのほうが出ず、手で追加した URL だけが使われる（確認済み）。
+   - そのプロジェクトを Codex が trusted にしているときは、プロジェクトの `.codex/config.toml` の同名 `[mcp_servers.<名前>]` も `codex mcp list`／`codex mcp get` に出て、プラグインの代わりに使われる（確認済み。untrusted なプロジェクトでは無視され、プラグインが使われる）。`codex mcp list` に出ているサーバーがプロジェクト起因かもしれないので、重複が疑わしいときは、そのプロジェクトのディレクトリで `cat .codex/config.toml` も直接見て確かめる。
+3. 外してよいと言われたときだけ、保存元に応じて外す（勝手に消さない。関係ない設定は触らない）。
+   - **グローバル**: `codex mcp remove "<名前>"` を実行する。「Removed global MCP server '<名前>'.」と出て外れる。
+   - **プラグイン**: `codex mcp remove` ではなく `codex plugin remove "<名前>@<marketplace>"`（`codex plugin list` で `<marketplace>` を確かめる）。
+   - **プロジェクト**: `codex mcp remove` を実行しても、グローバル設定にその名前が無ければ `No MCP server named '<名前>' found.`（終了コード 0）と出るだけで、プロジェクトの `.codex/config.toml` は**変わらない**（trusted でも同じ）。利用者に `.codex/config.toml` の中の名前を見せて同意を得てから、そのプロジェクトの `.codex/config.toml` を開き、重複している `[mcp_servers.<名前>]` の表だけを手で削除してもらう（他の設定は残す）。Codex からファイルを直接書き換えない。
+   - Codex から実行できなければ、利用者に自分のターミナルで実行・編集してもらう。
+4. 外した後の確認は保存元で分ける。グローバル・プラグインは `codex mcp list` に重複が無くなったことで確認できる。プロジェクトも trusted なら `codex mcp list` に出ているので同様に確認できるが、untrusted のときは `codex mcp list` に出ないため、そのプロジェクトの `.codex/config.toml` を再度見て、該当の表が無くなったことを確認する。
+5. **設定を変えたら、Codex を起動し直して新しい会話を始める。** 「sighted-stg の sighted-setup に従って Sighted に接続して」と送るよう伝え、**ここで一旦止める**。この後の手順は、その新しい会話で続ける。
 
 ## 2. ログインと同意
 

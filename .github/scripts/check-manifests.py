@@ -104,8 +104,8 @@ if isinstance(codex_market, dict):
         policy = entry.get("policy") or {}
         if policy.get("installation") not in {"AVAILABLE", "INSTALLED_BY_DEFAULT", "NOT_AVAILABLE"}:
             error(codex_market_path, f"{where}.policy.installation が不正です")
-        if policy.get("authentication") not in {"ON_INSTALL", "ON_FIRST_USE"}:
-            error(codex_market_path, f"{where}.policy.authentication が不正です")
+        if policy.get("authentication") != "ON_INSTALL":
+            error(codex_market_path, f"{where}.policy.authentication は ON_INSTALL にします（契約で固定）")
         manifest = validate(plugin_dir / "plugin.json", "plugin.schema.json")
         if isinstance(manifest, dict) and manifest.get("name") != entry.get("name"):
             error(plugin_dir / "plugin.json", f"name をマーケットプレイスの {entry.get('name')} と合わせます")
@@ -156,6 +156,35 @@ for p in repo_files:
     for label, pattern in SECRET_PATTERNS.items():
         if pattern.search(text):
             error(p, f"{label}らしい文字列があります")
+
+# 社内の SSOT・spec への参照を公開リポジトリに持ち込まない。
+# このスクリプト自身も検査対象にする。パターンの文字列を "docs/" + "ssot/" のように
+# 分けて組み立てているのは、このファイルの source テキストに検査対象そのものの
+# 連続した文字列を書かないため（分けて書けば self-match しない）。
+SSOT_PATH = "docs/" + "ssot/"
+# spec ディレクトリの ID は YYYY-MM-DD-<slug> の形。公式サイトの changelog 等、
+# 日付付きの公開 URL のパスも同じ形になりうるので、その場合は除外する
+# （マッチ位置の手前を空白・引用符まで遡り、その中に "://" があれば URL の一部と見なす）。
+SPEC_ID_PATTERN = re.compile(r"\b\d{4}-\d{2}-\d{2}-[a-z][a-z0-9]*(?:-[a-z0-9]+)+\b")
+
+
+def _is_inside_url(text, start):
+    boundary = re.compile(r"[\s\"'<>()\[\]]")
+    token_start = start
+    while token_start > 0 and not boundary.match(text[token_start - 1]):
+        token_start -= 1
+    return "://" in text[token_start:start]
+
+
+for p in repo_files:
+    text = p.read_text(encoding="utf-8", errors="replace")
+    if SSOT_PATH in text:
+        error(p, "SSOT のパスらしい文字列があります（社内の SSOT・spec への参照は公開しない）")
+    for m in SPEC_ID_PATTERN.finditer(text):
+        if _is_inside_url(text, m.start()):
+            continue
+        error(p, "spec ディレクトリの ID らしい文字列があります（社内の SSOT・spec への参照は公開しない）")
+        break
 
 if errors:
     for message in dict.fromkeys(errors):

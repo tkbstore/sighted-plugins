@@ -26,7 +26,7 @@ ChatGPT の **Settings → Security and login → Developer mode** をオンに�
    ```
 
    **末尾にスラッシュを付けません**（`/mcp/` にしない）。`https://` から `/mcp` まで一字も変えずに貼ってください。違う URL だと接続できません。
-4. 認証は **OAuth** を選びます。client ID・client secret は入力しません（欄があっても空のまま）。
+4. 認証は **OAuth** を選びます（`No authentication` ではありません）。client ID・client secret は入力しません（欄があっても空のまま）。[OpenAI の custom MCP server の手順](https://developers.openai.com/api/docs/guides/custom-mcp-server)（2026-10-06 時点）は、client ID・secret を自分で入れない場合に ChatGPT が CIMD（Client ID Metadata Document）を使えると説明していますが、これは**自動ではなく**、「認可サーバーが対応を広告していて、かつ作成者が CIMD を選んだとき」が条件です（原文: "ChatGPT can use Client ID Metadata Documents when the authorization server advertises support **and the app creator chooses CIMD**"）。つまり、client ID・secret を空のままにするだけでなく、**CIMD を選ぶ操作が別途必要**です。この画面でその選択がどの項目名（ボタン・ドロップダウンなど）で出るかは、公式手順には書かれておらず確かめられていません。選択肢が見えたら「CIMD」を選び、見当たらない場合は画面の指示に従ってください。画面の表記は変わることがあります。
 5. 注意の表示を読み、**I understand and want to continue** → **Create as a plugin** を選びます。
 
 ## 3. ログインと同意

@@ -24,6 +24,20 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - run: uv run --no-project --with 'jsonschema==4.25.1' python .github/scripts/check-manifests.py
 
+  commit-authors:
+    name: commit の author/committer メール
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          set -o pipefail
+          git log --format='%H%x1f%ae%x1f%ce' \
+            "${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}" \
+            | python3 .github/scripts/check-commit-authors.py
+
   claude:
     name: Claude のプラグインとして読める
     runs-on: ubuntu-latest
