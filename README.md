@@ -76,10 +76,11 @@ codex mcp login の実行は Codex が自分で行ってよい。ブラウザで
 
 ### ChatGPT
 
-ChatGPT ではプラグインを使わず、Developer mode で MCP サーバーを app として追加します。手順は [docs/chatgpt.md](docs/chatgpt.md) にあります。
+ChatGPT ではプラグインを使わず、[`chatgpt.com/plugins`](https://chatgpt.com/plugins) → ＋ → **Create custom MCP server** で MCP サーバーを app として追加します。手順は [docs/chatgpt.md](docs/chatgpt.md) にあります。
 
 - MCP サーバーの URL は `https://mcp.stg.sighted-aeo.com/mcp` を**末尾スラッシュなし**で、そのまま貼ります。client ID・client secret は入力しません。
 - ChatGPT Free では使えません。試す人は ChatGPT の設定でモデルの改善（Improve the model for everyone）をオフにしてください。
+- **Plus・Pro では計測の実行（`run_query`）は使えず、データを読むだけです。** 計測の実行は ChatGPT の Business・Enterprise・Edu プラン、または Sighted の画面・Claude・Codex から行えます（根拠: [Developer mode and MCP apps in ChatGPT](https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt)）。
 - ChatGPT には skill が付かず、分析・計測の手順は届きません。
 
 ### Sighted のアカウントが無いとき
