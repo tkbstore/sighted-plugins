@@ -5,6 +5,7 @@
 - Codex のマーケットプレイスの source.path が、リポジトリの根から中のディレクトリに解決できること
 - MCP サーバーの URL が完全な URL（末尾スラッシュなし）で、接続の設定に client ID・秘密・ヘッダーを入れないこと
 - README の導入コマンドがマーケットプレイスの名前と合うこと、ChatGPT の案内に完全な URL があること
+- SKILL.md の frontmatter が YAML として読め、name がディレクトリ名と合うこと（厳密な読み手が skill を落とさないように）
 - 秘密鍵・トークン・メールアドレスを含まないこと
 
 schema は .github/schemas/ に置いた写し（https://agent-plugins.org/schemas/1.0.0/）を使い、検査のときに外へ取りに行かない。
@@ -15,6 +16,7 @@ import pathlib
 import re
 import sys
 
+import yaml
 from jsonschema import Draft202012Validator
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -141,6 +143,25 @@ for p in repo_files:
     for url in MCP_URLS.values():
         if url + "/" in text:
             error(p, f"{url}/ と末尾スラッシュ付きで書かない")
+
+# SKILL.md の frontmatter：Claude Code は崩れた YAML も読むが、厳密な読み手は skill ごと落とす
+# （引用符の無い description の中の「: 」など）
+for p in repo_files:
+    if p.name != "SKILL.md":
+        continue
+    parts = p.read_text(encoding="utf-8").split("---", 2)
+    if len(parts) < 3 or parts[0].strip():
+        error(p, "先頭に --- で囲んだ frontmatter が要ります")
+        continue
+    try:
+        meta = yaml.safe_load(parts[1])
+    except yaml.YAMLError as e:
+        error(p, f"frontmatter が YAML として読めません（「: 」を含む値は引用符で囲むか言い換える）: {e}")
+        continue
+    if not isinstance(meta, dict) or not all(isinstance(meta.get(k), str) for k in ("name", "description")):
+        error(p, "frontmatter に name と description が要ります")
+    elif meta["name"] != p.parent.name:
+        error(p, f"name {meta['name']} をディレクトリ名 {p.parent.name} と合わせます")
 
 # 秘密・個人の情報を置かない
 SECRET_PATTERNS = {

@@ -1,6 +1,6 @@
 ---
 name: sighted-deliverable-check
-description: AEO の分析・計画を報告・納品する前に、主張と根拠、数値と元データ、読みやすさ、全ページの表示、渡した版を確かめるときに使う。「AEO レポートを納品前に確認して」「数値と根拠を照合して」「上司向けにまとめて」「報告用に短くして」「納品版を確定して」で使う。Use before delivering or summarizing AEO analyses: claim-evidence checks, display checks, and version records.
+description: AEO の分析・計画を報告・納品する前に、主張と根拠、数値と元データ、読みやすさ、全ページの表示、渡した版を確かめるときに使う。「AEO レポートを納品前に確認して」「数値と根拠を照合して」「上司向けにまとめて」「報告用に短くして」「納品版を確定して」で使う。Use before delivering or summarizing AEO analyses, to check claims against evidence, page display, and version records.
 ---
 
 # AEO の報告を確かめる

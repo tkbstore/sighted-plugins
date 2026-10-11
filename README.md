@@ -118,7 +118,7 @@ ChatGPT ではプラグインを使わず、[`chatgpt.com/plugins`](https://chat
   cp skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
   ```
 
-- 手元での検査: `bash .github/scripts/check-skill-copies.sh`、`uv run --no-project --with 'jsonschema==4.25.1' python .github/scripts/check-manifests.py`、`claude plugin validate --strict .`、`claude plugin validate --strict ./plugins/sighted-stg`。
+- 手元での検査: `bash .github/scripts/check-skill-copies.sh`、`uv run --no-project --with 'jsonschema==4.25.1' --with 'pyyaml==6.0.2' python .github/scripts/check-manifests.py`、`claude plugin validate --strict .`、`claude plugin validate --strict ./plugins/sighted-stg`。
 - Codex 用の `plugin.json`・`mcp.json` は Agent Plugins 1.0.0 の形式です。CI は `.github/schemas/` に置いた schema の写し（https://agent-plugins.org/schemas/1.0.0/）で検査します。
 - 中身を変えたら、そのプラグインの `version` を上げます（Claude 用は `.claude-plugin/plugin.json`、Codex 用は `plugin.json`）。上げないと、入れた人に更新が届きません（Codex も入れたプラグインを版ごとに保存します）。
 - skill は外部から手順を取りに行かない作りにします。手順はファイルに書いたことだけです。

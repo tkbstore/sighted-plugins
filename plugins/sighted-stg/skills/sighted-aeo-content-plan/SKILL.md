@@ -1,6 +1,6 @@
 ---
 name: sighted-aeo-content-plan
-description: AEO の計測結果から、自社サイトのどのページを作る・直すか、SNS で何を発信するか、どこに載ってもらうか、必要な一次情報は何かを決めるときに使う。「引用されない質問から施策を考えて」「AEO のコンテンツ計画を作って」「AI に引用されるにはどのページを直せばいい」「SNS の投稿で AI に引用されたい」「記事や投稿に必要な情報を整理して」で使う。Use for AEO content planning across the website, social posts, and third-party exposure: first-party information briefs and remeasurement plans.
+description: AEO の計測結果から、自社サイトのどのページを作る・直すか、SNS で何を発信するか、どこに載ってもらうか、必要な一次情報は何かを決めるときに使う。「引用されない質問から施策を考えて」「AEO のコンテンツ計画を作って」「AI に引用されるにはどのページを直せばいい」「SNS の投稿で AI に引用されたい」「記事や投稿に必要な情報を整理して」で使う。Use for AEO content planning across the website, social posts, and third-party exposure, including first-party information briefs and remeasurement plans.
 ---
 
 # AEO の施策を決める
