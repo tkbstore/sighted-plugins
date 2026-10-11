@@ -1,9 +1,9 @@
 ---
-name: sighted-aeo-start
-description: AEO の取り組みを始める、前回の続きから再開する、定期的に回す（自動化する）ときに使う。「AEO を始めたい」「前回の続き」「毎月回して」「全部自動で」「何から見ればいい」で使う。Use when starting, resuming, or setting up a recurring AEO workflow with Sighted.
+name: sighted-aeo-context
+description: AEO の取り組みの目的・前提と、施策・結果の記録を扱う。始める、前回の続きから再開する、定期的に回す（自動化する）、結果や決めたことを残すときに使う。「AEO を始めたい」「前回の続き」「毎月回して」「全部自動で」「何から見ればいい」「結果を記録して」で使う。Use when starting, resuming, or setting up a recurring AEO workflow with Sighted, and when recording hypotheses, results, and decisions.
 ---
 
-# AEO を始める・続ける
+# AEO の目的と記録
 
 施策の良し悪しは目的で決まる。分析も制作も、目的・相手・自社の事実を押さえてから進め、前回までの前提・出来事・決定を次回に引き継ぐ。利用者と同じ言語で答える。
 
@@ -27,13 +27,14 @@ description: AEO の取り組みを始める、前回の続きから再開する
 ```
 aeo/
   profile.md        前提: 上の要件・自社名の表記
-  plan.md           決定: 施策と状態（提案済み／作成済み／公開済み＋公開日）
+  plan.md           決定: 施策ごとの仮説（狙った質問・期待した変化）、状態（提案済み／作成済み／公開済み＋公開日）、再計測の結果
   log.md            出来事: 日付・したこと・分かったこと（新しいものを上に）
   data/YYYY-MM-DD/  取得した結果と取得の範囲（期間・件数・未取得の範囲）
   reports/          出した報告
 ```
 
 - 再開・提案・制作の前に、profile.md と、plan.md・log.md の直近を読む。
+- 再計測したら、結果を plan.md の施策の仮説の隣に書き、仮説との差から次の施策を考える。
 - 前提を変えたら、何をなぜ変えたかを log.md に書く。
 - ファイルを書けない環境（claude.ai・デスクトップのチャット）では、更新した profile.md・plan.md・log.md の全文を答えの最後に出し、次回アップロードしてもらう。
 

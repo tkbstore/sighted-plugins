@@ -7,7 +7,7 @@ description: AEO（AI の回答での露出）の計測結果を読み、自社�
 
 見るのは、他社が AI に挙げられ、自社が挙げられない場面である。それが **どの質問で、どれくらいの頻度で起き、何人の判断に届きうるか** を数え、原因を切り分けて施策に渡す。利用者と同じ言語で答える。
 
-Sighted のツールの使い方・費用・実行・エラーは `sighted-analysis` に従う。目的と前提は、記録があれば profile.md から読む（`sighted-aeo-start`）。
+Sighted のツールの使い方・費用・実行・エラーは `sighted-analysis` に従う。目的と前提は、記録があれば profile.md から読む（`sighted-aeo-context`）。
 
 ## 出すもの
 
