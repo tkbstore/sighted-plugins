@@ -12,6 +12,8 @@ skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg/skills/sighted-aeo-sta
 skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-start/SKILL.md
 skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg/skills/sighted-aeo-measure/SKILL.md
 skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-measure/SKILL.md
+skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg/skills/sighted-aeo-content-plan/SKILL.md
+skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-content-plan/SKILL.md
 skills-src/claude/sighted-setup/SKILL.md plugins/sighted-stg/skills/sighted-setup/SKILL.md
 skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
 '
