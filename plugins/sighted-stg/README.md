@@ -10,6 +10,7 @@ claude.ai（Web・デスクトップ・モバイル）、Cowork、Claude Code �
 | `.mcp.json` | Sighted の MCP サーバー `https://mcp.stg.sighted-aeo.com/mcp` への接続。ログインは OAuth で、client ID の入力は要りません |
 | `skills/sighted-setup/SKILL.md` | Claude が従う手順。接続・ログイン・接続し直しの案内、重複する MCP サーバーの整理、`Needs authentication` の扱い。原稿は `skills-src/claude/sighted-setup/` |
 | `skills/sighted-analysis/SKILL.md` | Claude が従う手順。ワークスペースの選び方、データの取り方と数字の読み方、計測の実行前の確認、足りないときの案内、Meta 広告データの利用制限。原稿は `skills-src/sighted-analysis/`（Codex 用と共通） |
+| `skills/sighted-aeo-start/SKILL.md` | Claude が従う手順。AEO の目的と要件の決め方、前提・出来事・決定の記録の形。原稿は `skills-src/sighted-aeo-start/`（Codex 用と共通） |
 
 ## 使い方
 
@@ -28,6 +29,7 @@ claude plugin install sighted-stg@sighted --scope user
 - 「先週の AI の回答での露出と、Search Console の検索流入を比べて」
 - 「GA4 のセッション数を先月と比べて」
 - 「このクエリの計測を回して」
+- 「月次のAEOレポートを作り、引用率の変化と次の施策を整理して」
 
 ## 計測の実行前の確認
 

@@ -99,13 +99,15 @@ ChatGPT ではプラグインを使わず、[`chatgpt.com/plugins`](https://chat
 - 構成:
   - `.claude-plugin/marketplace.json`（Claude のマーケットプレイス）と `plugins/sighted-stg/`（`.claude-plugin/plugin.json`・`.mcp.json`・`skills/`）。
   - `.agents/plugins/marketplace.json`（Codex のマーケットプレイス。`source.path` はリポジトリの根から）と `plugins/sighted-stg-codex/`（`plugin.json`・`mcp.json`・`skills/`）。
-  - `skills-src/`: skill の原稿。`sighted-analysis` は両方に共通、`sighted-setup` は `claude/`・`codex/` で別。
+  - `skills-src/`: skill の原稿。`sighted-analysis`・`sighted-aeo-start` は両方に共通、`sighted-setup` は `claude/`・`codex/` で別。
   - `docs/chatgpt.md`: ChatGPT での追加手順。
 - skill は `skills-src/` の原稿を直し、次のコマンドで各プラグインへコピーして一緒に commit します（プラグインの中のコピーを直接直さない）。CI（`.github/workflows/check.yml`）が原稿と各コピーの一致を検査します。
 
   ```sh
   cp skills-src/sighted-analysis/SKILL.md plugins/sighted-stg/skills/sighted-analysis/SKILL.md
   cp skills-src/sighted-analysis/SKILL.md plugins/sighted-stg-codex/skills/sighted-analysis/SKILL.md
+  cp skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg/skills/sighted-aeo-start/SKILL.md
+  cp skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-start/SKILL.md
   cp skills-src/claude/sighted-setup/SKILL.md plugins/sighted-stg/skills/sighted-setup/SKILL.md
   cp skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
   ```

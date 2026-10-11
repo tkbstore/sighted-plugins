@@ -8,6 +8,8 @@ cd "$(dirname "$0")/../.." || exit 1
 pairs='
 skills-src/sighted-analysis/SKILL.md plugins/sighted-stg/skills/sighted-analysis/SKILL.md
 skills-src/sighted-analysis/SKILL.md plugins/sighted-stg-codex/skills/sighted-analysis/SKILL.md
+skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg/skills/sighted-aeo-start/SKILL.md
+skills-src/sighted-aeo-start/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-start/SKILL.md
 skills-src/claude/sighted-setup/SKILL.md plugins/sighted-stg/skills/sighted-setup/SKILL.md
 skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
 '
