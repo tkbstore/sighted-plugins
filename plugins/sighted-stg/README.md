@@ -11,7 +11,7 @@ claude.ai（Web・デスクトップ・モバイル）、Cowork、Claude Code �
 | `skills/sighted-setup/SKILL.md` | Claude が従う手順。接続・ログイン・接続し直しの案内、重複する MCP サーバーの整理、`Needs authentication` の扱い。原稿は `skills-src/claude/sighted-setup/` |
 | `skills/sighted-analysis/SKILL.md` | Claude が従う手順。ワークスペースの選び方、データの取り方と数字の読み方、計測の実行前の確認、足りないときの案内、Meta 広告データの利用制限。原稿は `skills-src/sighted-analysis/`（Codex 用と共通） |
 | `skills/sighted-aeo-context/SKILL.md` | Claude が従う手順。AEO の目的と要件の決め方、施策の仮説と結果・前提・出来事・決定の記録の形。原稿は `skills-src/sighted-aeo-context/`（Codex 用と共通） |
-| `skills/sighted-aeo-measure/SKILL.md` | Claude が従う手順。自社が挙がらず他社が挙がる質問、その頻度と届きうる人数、原因の分類。原稿は `skills-src/sighted-aeo-measure/`（Codex 用と共通） |
+| `skills/sighted-aeo-measure/SKILL.md` | Claude が従う手順。自社が挙がらず他社が挙がる質問、その頻度と届きうる人数、質問ごとの段階。原稿は `skills-src/sighted-aeo-measure/`（Codex 用と共通） |
 | `skills/sighted-aeo-content-plan/SKILL.md` | Claude が従う手順。施策の種類の選び方、一次情報ブリーフ、計画と再計測の書き方。原稿は `skills-src/sighted-aeo-content-plan/`（Codex 用と共通） |
 | `skills/sighted-deliverable-check/SKILL.md` | Claude が従う手順。主張と根拠の照合、全ページの表示、版と引渡しの記録。原稿は `skills-src/sighted-deliverable-check/`（Codex 用と共通） |
 
