@@ -13,6 +13,7 @@ claude.ai（Web・デスクトップ・モバイル）、Cowork、Claude Code �
 | `skills/sighted-aeo-start/SKILL.md` | Claude が従う手順。AEO の目的と要件の決め方、前提・出来事・決定の記録の形。原稿は `skills-src/sighted-aeo-start/`（Codex 用と共通） |
 | `skills/sighted-aeo-measure/SKILL.md` | Claude が従う手順。自社が挙がらず他社が挙がる質問、その頻度と届きうる人数、原因の分類。原稿は `skills-src/sighted-aeo-measure/`（Codex 用と共通） |
 | `skills/sighted-aeo-content-plan/SKILL.md` | Claude が従う手順。施策の種類の選び方、一次情報ブリーフ、計画と再計測の書き方。原稿は `skills-src/sighted-aeo-content-plan/`（Codex 用と共通） |
+| `skills/sighted-deliverable-check/SKILL.md` | Claude が従う手順。主張と根拠の照合、全ページの表示、版と引渡しの記録。原稿は `skills-src/sighted-deliverable-check/`（Codex 用と共通） |
 
 ## 使い方
 
