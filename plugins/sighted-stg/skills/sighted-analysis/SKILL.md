@@ -107,8 +107,8 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
    - 見つからなければ、自動で呼び直さない。新しい見積もりを見せ、明示の OK をもらい直す（この章の 1 から）。
 
 **見積もりの判定**（`estimate_query` を呼ぶたびに。最初も取り直しも）
-- エラー、またはツールが無い → 実行しない。7 章で案内するか、Sighted の画面から実行してもらう。
-- `sufficient` が `false` → 実行しない。足りない量（`required` − `available`）を伝え、購入を案内する（7 章）。
+- エラー、またはツールが無い → 実行しない。8 章で案内するか、Sighted の画面から実行してもらう。
+- `sufficient` が `false` → 実行しない。足りない量（`required` − `available`）を伝え、購入を案内する（8 章）。
 - `platforms` が空 → 実行しない。有効なエンジンが無いので、Sighted のクエリ画面で有効にしてもらう。
 
 **OK の使い方**
@@ -127,7 +127,8 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
 
 - 対象のクエリを探すには `list_queries(workspace_id)` を使う。`limit`・`offset`・`is_active`・`platform_id`・`search` で絞れる（既定 20・最大 100 件、`has_more` が `true` なら次ページ）。返る `id` をそのまま `run_query`・`update_query`・`preview_query_deletion`・`delete_query` の `query_id` に使う。
 - `create_query(workspace_id, query, platform_ids, memo="")` で質問を1件追加する。追加しただけでは実行されず、次回実行日は翌日。追加自体にクレジットは使わない。失敗や応答が無いときも自動で再送しない（同じ質問のクエリが重複して作られる）。結果は `list_queries` で確かめる。
-- **質問の本文・メモ・頻度は追加後に変えられない。** 変えたいときは新しく `create_query` で作り直す。
+- **質問の本文は追加後は変えられない**（MCP でも Sighted の画面でも）。変えたいときは新しく `create_query` で作る。
+- **メモ・頻度は MCP からは変えられない**（`create_query` に頻度の引数は無く、追加したクエリの頻度は毎日になる）。変えたいときは Sighted のクエリ画面で変更してもらう。
 - `update_query(workspace_id, query_id, patch)` で、対象プラットフォームの有効・無効（`patch.platforms`）とクエリ全体の停止・再開（`patch.is_active`）だけを変える。停止しても予約済みの実行は取り消されず、次回実行日・停止理由は変わらない。有効なプラットフォームが0になる変更と、有効なプラットフォームの無いクエリの再開はできない。同じ設定への変更は `changed: false` で何も変わらない。設定の変更自体にクレジットは使わない。
 - 削除は二段階。まず `preview_query_deletion(workspace_id, query_id)` を呼び、対象の質問・WS、削除する回答・引用・集計などの件数（0件も含む）、削除後も残る記録、復元できないことを**利用者に見せて、削除してよいか聞いて返事を待つ**（5 章の実行前確認と同じ扱い。推測で進めず、同じ応答の中で `delete_query` を呼ばない）。利用者がはっきり OK したら、その結果の `confirmation_token` と `confirmed: true` を付けて `delete_query(workspace_id, query_id, confirmation_token, confirmed)` を呼ぶ。
 - 対象や設定・件数が preview の時点から変わっていると `confirmation_invalid`・`confirmation_stale` になる（8 章）。そのときは新しく `preview_query_deletion` から確認を取り直す。削除したクエリと回答・引用・集計は復元できない。実行・課金の記録は残る。
@@ -174,6 +175,7 @@ Meta 広告のデータ（`meta_ads_daily_stats`・`meta_ads_by_ad`、`get_metri
 次のことはこの接続からはできない。頼まれたら、Sighted の画面ですることを案内する。
 
 - WS の作成、連携（GSC・GA4・Meta）の追加
-- クエリの本文・メモ・頻度の変更、まとめて管理する操作（7 章の4ツールでできるのは追加・プラットフォームの有効無効・停止再開・削除だけ）
+- クエリの本文の変更（Sighted の画面でも変えられない。変えたいときは新しく作る）
+- クエリのメモ・頻度の変更、まとめて管理する操作（7 章の4ツールでできるのは追加・プラットフォームの有効無効・停止再開・削除だけ。メモ・頻度は Sighted の画面で変更できる）
 - クレジットの購入、プランの変更
 - 同意していない WS・連携先のデータや、YouTube のデータの取得
