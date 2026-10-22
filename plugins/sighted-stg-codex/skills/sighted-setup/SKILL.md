@@ -71,4 +71,4 @@ Sighted のアカウントが無ければ、先に `<入口>/signup` で登録�
 
 sighted-analysis から接続し直しを案内するとき（`mcp_consent_scope_required`、使える WS が無い、WS・連携先を選び直したいなど）や、Sighted の画面に「接続元のアプリに戻って接続し直してください。」と出たときは、2 と同じく `codex mcp login "<名前>"` を実行し、同意画面で WS と連携先を選び直してもらう。前のログインを消してからやり直したいときは、先に `codex mcp logout "<名前>"` を実行する。
 
-ツールの結果に `reauthorize_url` があれば、sighted-analysis の「画面の URL」の節の決まり（`https://` で入口と同じ origin のときだけ使う）を守って示す。
+ツールの結果に `guidance` があれば、その文言どおりに `codex mcp login "<名前>"` で認証し直してもらい、表示された同意画面で内容を確認して同意してもらう。
