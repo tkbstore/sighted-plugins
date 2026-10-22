@@ -141,7 +141,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
 | --- | --- | --- |
 | `insufficient_credits` | 残高不足（`required`・`available` 付き） | 足りない量（`required` − `available`）。クレジットは Sighted にログインしてクレジットの購入画面（「画面の URL」の表）で買える。この接続からは買えない。実行しない。買い足した後に実行するときは、新しい見積もりと OK から（5 章） |
 | `provider_not_connected` | その WS に、求めた連携先（`missing`）がつながっていない | `connections_url` を示し、Sighted の連携画面でつないでもらう。つないだら元の作業に戻る |
-| `mcp_consent_scope_required` | この接続で、その WS・連携先の利用に同意していない（配列の `missing` に `"*"` が含まれるなら接続全体の同意が古い） | `guidance` の文言を示し、この AI クライアントの Sighted の接続を認証し直してもらう（手順は `sighted-setup`）。表示された同意画面で内容を確認し、WS と連携先を選んで同意してもらう |
+| `mcp_consent_scope_required` | この接続で、その WS・連携先の利用に同意していない（配列の `missing` に `"*"` が含まれるなら接続全体の同意が古い） | `guidance` があればその文言を示し、この AI クライアントの Sighted の接続を認証し直してもらう（手順は `sighted-setup`）。表示された同意画面で内容を確認し、WS と連携先を選んで同意してもらう |
 | `legal_consent_required` | 利用規約・プライバシーポリシーの新しい版への同意が要る | `consent_url` と `documents` を示し、Sighted で同意してもらう |
 | `legal_consent_check_unavailable` | 一時的に確かめられない | 時間を置いてやり直す。同意し直しは求めない |
 | `connection_selection_required` | 同じ種類の接続が複数ある | 2 章の 5 |
