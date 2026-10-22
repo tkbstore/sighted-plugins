@@ -43,4 +43,4 @@ sighted-analysis から接続し直しを案内するとき（`mcp_consent_scope
 - Claude Code: `/mcp` から。
 - claude.ai・デスクトップアプリ・Cowork: プラグインの **Connectors** タブ（コネクタ）から。
 
-ツールの結果に `reauthorize_url` があれば、sighted-analysis の「画面の URL」の節の決まり（`https://` で入口と同じ origin のときだけ使う）を守って示す。
+ツールの結果に `guidance` があれば、その文言どおりにこの接続先（Claude Code の `/mcp`、または claude.ai・デスクトップアプリ・Cowork の Connectors タブ）で認証し直してもらい、表示された同意画面で内容を確認して同意してもらう。
