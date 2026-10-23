@@ -25,7 +25,7 @@ Sighted のアカウントが無ければ、先に `<入口>/signup` で登録�
 4. 利用者に次を伝える。
    - `/mcp` を打って `plugin:sighted-stg:sighted-stg` を選び、開いたブラウザで Sighted にログインし、ワークスペースと連携先を選んで同意する。
    - **Claude は `claude mcp login` を自分で実行しない（できない）。** ブラウザでの OAuth は利用者が行う。
-5. 利用者が「接続した」「ログインした」などと言ったら `list_workspaces` を呼んで確かめる。取れたら、何ができるか（分析・計測の実行など）を一言で紹介する。エラーになったら sighted-analysis の 7 章（足りないときの案内）の表に従う。
+5. 利用者が「接続した」「ログインした」などと言ったら `list_workspaces` を呼んで確かめる。取れたら、何ができるか（分析・計測の実行など）を一言で紹介する。エラーになったら sighted-analysis の 8 章（足りないときの案内）の表に従う。
 
 ## claude.ai・デスクトップアプリ・Cowork
 
@@ -34,7 +34,7 @@ Sighted のアカウントが無ければ、先に `<入口>/signup` で登録�
 1. プラグインを開き、**Connectors** タブから Sighted のコネクタを追加する。
 2. 開いたブラウザで Sighted にログインし、ワークスペースと連携先を選んで同意する。
 
-接続できたら `list_workspaces` で確かめ、何ができるかを一言で紹介する。エラーになったら sighted-analysis の 7 章に従う。
+接続できたら `list_workspaces` で確かめ、何ができるかを一言で紹介する。エラーになったら sighted-analysis の 8 章に従う。
 
 ## 接続し直すとき
 
@@ -43,4 +43,4 @@ sighted-analysis から接続し直しを案内するとき（`mcp_consent_scope
 - Claude Code: `/mcp` から。
 - claude.ai・デスクトップアプリ・Cowork: プラグインの **Connectors** タブ（コネクタ）から。
 
-ツールの結果に `reauthorize_url` があれば、sighted-analysis の「画面の URL」の節の決まり（`https://` で入口と同じ origin のときだけ使う）を守って示す。
+ツールの結果に `guidance` があれば、その文言どおりにこの接続先（Claude Code の `/mcp`、または claude.ai・デスクトップアプリ・Cowork の Connectors タブ）で認証し直してもらい、表示された同意画面で内容を確認して同意してもらう。
