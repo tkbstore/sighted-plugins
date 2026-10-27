@@ -83,7 +83,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
   - GA4: `users`・`engagement_rate` は日ごとの値で、期間では合計しない。
   - Facebook・Instagram の投稿の値は公開からの累積（`as_of` の時点）で、日ごとに足さない。`delta` は指定した期間の伸びではなく、最新 2 回の観測の差（`from` から `to` までの `span_days` 日分。観測が 1 回の指標は `delta` に出ない）。答えには `from`・`to` を書き、「先月の伸び」などと言い換えない。期間の伸びが要るときは、`get_metrics` の投稿ごとの観測（累積値）の差で見て、使った観測日を書く。
   - Meta 広告: `meta_ads_daily_stats`・`meta_ads_by_ad` の `ctr` は 0〜1 の比率（2% は 0.02）。`get_metrics` の `meta.ads.ctr` は Meta の百分率のまま（2% は 2.0）で、`metric_unit` の表示とは合わない。単位は `metric_unit` だけで決めない。`reach`・`frequency` は期間で合計しない。
-- AEO: 質問を `list_queries` で探し、既存の回答を `get_query_results` で読むところから始める。競合・紹介理由・施策の判断では `raw` の確認を必須にする（本文・引用の読み方は `sighted-aeo-measure`）。`get_query_results` の `raw` は AI の回答そのもの。回答から数え直した言及・引用は Sighted の画面の数字と一致しないことがあるので「回答から数えた参考値」と書く。Sighted のダッシュボードの指標は、定期実行（`execution_type: scheduled`）で成功した結果だけを数えている。
+- AEO: `list_queries(search=)` で会社名だけでなく用途・カテゴリ・比較軸でも広く質問を探し、読む対象を絞ってから既存の回答を `get_query_results` で読む。競合・紹介理由・施策の判断では `raw` の確認を必須にする（本文・引用の読み方は `sighted-aeo-measure`）。`get_query_results` の `raw` は AI の回答そのもの。回答から数え直した言及・引用は Sighted の画面の数字と一致しないことがあるので「回答から数えた参考値」と書く。Sighted のダッシュボードの指標は、定期実行（`execution_type: scheduled`）で成功した結果だけを数えている。
 - 連携はあるがデータが 0 件なら、エラーではなく「まだデータが無い」と伝える。
 
 ## 5. 実行の前の確認（必ず守る）
