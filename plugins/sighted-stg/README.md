@@ -47,6 +47,6 @@ claude plugin install sighted-stg@sighted --scope user
 
 ## できないこと
 
-- ワークスペース・クエリの作成、連携（Google Search Console・Google Analytics 4・Meta）の追加、クレジットの購入。これらは Sighted の画面で行います
+- ワークスペースの作成、連携（Google Search Console・Google Analytics 4・Meta）の追加、クレジットの購入。これらは Sighted の画面で行います
 - YouTube のデータの取得（MCP では提供していません）
 - 接続のときの同意画面で選んでいないワークスペース・連携先のデータの取得
