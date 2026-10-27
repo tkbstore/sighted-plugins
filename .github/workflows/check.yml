@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
-      - run: uv run --no-project --with 'jsonschema==4.25.1' python .github/scripts/check-manifests.py
+      - run: uv run --no-project --with 'jsonschema==4.25.1' --with 'pyyaml==6.0.2' python .github/scripts/check-manifests.py
 
   commit-authors:
     name: commit の author/committer メール

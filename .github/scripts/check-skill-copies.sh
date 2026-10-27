@@ -8,6 +8,14 @@ cd "$(dirname "$0")/../.." || exit 1
 pairs='
 skills-src/sighted-analysis/SKILL.md plugins/sighted-stg/skills/sighted-analysis/SKILL.md
 skills-src/sighted-analysis/SKILL.md plugins/sighted-stg-codex/skills/sighted-analysis/SKILL.md
+skills-src/sighted-aeo-context/SKILL.md plugins/sighted-stg/skills/sighted-aeo-context/SKILL.md
+skills-src/sighted-aeo-context/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-context/SKILL.md
+skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg/skills/sighted-aeo-measure/SKILL.md
+skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-measure/SKILL.md
+skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg/skills/sighted-aeo-content-plan/SKILL.md
+skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-content-plan/SKILL.md
+skills-src/sighted-deliverable-check/SKILL.md plugins/sighted-stg/skills/sighted-deliverable-check/SKILL.md
+skills-src/sighted-deliverable-check/SKILL.md plugins/sighted-stg-codex/skills/sighted-deliverable-check/SKILL.md
 skills-src/claude/sighted-setup/SKILL.md plugins/sighted-stg/skills/sighted-setup/SKILL.md
 skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
 '

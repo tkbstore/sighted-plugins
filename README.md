@@ -99,18 +99,26 @@ ChatGPT ではプラグインを使わず、[`chatgpt.com/plugins`](https://chat
 - 構成:
   - `.claude-plugin/marketplace.json`（Claude のマーケットプレイス）と `plugins/sighted-stg/`（`.claude-plugin/plugin.json`・`.mcp.json`・`skills/`）。
   - `.agents/plugins/marketplace.json`（Codex のマーケットプレイス。`source.path` はリポジトリの根から）と `plugins/sighted-stg-codex/`（`plugin.json`・`mcp.json`・`skills/`）。
-  - `skills-src/`: skill の原稿。`sighted-analysis` は両方に共通、`sighted-setup` は `claude/`・`codex/` で別。
+  - `skills-src/`: skill の原稿。`sighted-analysis`・`sighted-aeo-context`・`sighted-aeo-measure`・`sighted-aeo-content-plan`・`sighted-deliverable-check` は両方に共通、`sighted-setup` は `claude/`・`codex/` で別。
   - `docs/chatgpt.md`: ChatGPT での追加手順。
 - skill は `skills-src/` の原稿を直し、次のコマンドで各プラグインへコピーして一緒に commit します（プラグインの中のコピーを直接直さない）。CI（`.github/workflows/check.yml`）が原稿と各コピーの一致を検査します。
 
   ```sh
   cp skills-src/sighted-analysis/SKILL.md plugins/sighted-stg/skills/sighted-analysis/SKILL.md
   cp skills-src/sighted-analysis/SKILL.md plugins/sighted-stg-codex/skills/sighted-analysis/SKILL.md
+  cp skills-src/sighted-aeo-context/SKILL.md plugins/sighted-stg/skills/sighted-aeo-context/SKILL.md
+  cp skills-src/sighted-aeo-context/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-context/SKILL.md
+  cp skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg/skills/sighted-aeo-measure/SKILL.md
+  cp skills-src/sighted-aeo-measure/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-measure/SKILL.md
+  cp skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg/skills/sighted-aeo-content-plan/SKILL.md
+  cp skills-src/sighted-aeo-content-plan/SKILL.md plugins/sighted-stg-codex/skills/sighted-aeo-content-plan/SKILL.md
+  cp skills-src/sighted-deliverable-check/SKILL.md plugins/sighted-stg/skills/sighted-deliverable-check/SKILL.md
+  cp skills-src/sighted-deliverable-check/SKILL.md plugins/sighted-stg-codex/skills/sighted-deliverable-check/SKILL.md
   cp skills-src/claude/sighted-setup/SKILL.md plugins/sighted-stg/skills/sighted-setup/SKILL.md
   cp skills-src/codex/sighted-setup/SKILL.md plugins/sighted-stg-codex/skills/sighted-setup/SKILL.md
   ```
 
-- 手元での検査: `bash .github/scripts/check-skill-copies.sh`、`uv run --no-project --with 'jsonschema==4.25.1' python .github/scripts/check-manifests.py`、`claude plugin validate --strict .`、`claude plugin validate --strict ./plugins/sighted-stg`。
+- 手元での検査: `bash .github/scripts/check-skill-copies.sh`、`uv run --no-project --with 'jsonschema==4.25.1' --with 'pyyaml==6.0.2' python .github/scripts/check-manifests.py`、`claude plugin validate --strict .`、`claude plugin validate --strict ./plugins/sighted-stg`。
 - Codex 用の `plugin.json`・`mcp.json` は Agent Plugins 1.0.0 の形式です。CI は `.github/schemas/` に置いた schema の写し（https://agent-plugins.org/schemas/1.0.0/）で検査します。
 - 中身を変えたら、そのプラグインの `version` を上げます（Claude 用は `.claude-plugin/plugin.json`、Codex 用は `plugin.json`）。上げないと、入れた人に更新が届きません（Codex も入れたプラグインを版ごとに保存します）。
 - skill は外部から手順を取りに行かない作りにします。手順はファイルに書いたことだけです。
