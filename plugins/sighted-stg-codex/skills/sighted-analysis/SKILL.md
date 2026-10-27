@@ -54,7 +54,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
 1. まず `list_workspaces` を呼ぶ。返った `id`・`name`・`domain` だけを使う。
 2. WS が複数あり、利用者がどれか言っていないときは、名前とドメインを並べて**利用者に選んでもらう**。それらしい 1 つを勝手に選ばない。1 つだけのときは、その WS を使うと一言添えて進める。
 3. 一覧が空なら、この接続で使える WS が無い。Sighted で WS を作るか、接続し直して（手順は `sighted-setup`）同意画面で WS を選んでもらう。
-4. クエリ ID は、`list_queries`（7 章）、`get_query_results`・`list_execution_jobs` の結果にあるものか、利用者が示したものだけを使う。クエリの本文は追加後 MCP からは変えられない（7 章）。決められないときは `list_queries` で候補を見せるか、Sighted のクエリ画面で確かめてもらう（クエリの詳細画面のアドレス（「画面の URL」の表）を貼ってもらえば ID が分かる。WS は `list_workspaces` の結果と突き合わせる）。
+4. クエリ ID は、`list_queries`（7 章）、`get_query_results`・`list_execution_jobs` の結果にあるものか、利用者が示したものだけを使う。クエリの本文は追加後 MCP からは変えられない（7 章）。探すときは `list_queries(search=)` を先に使い、決められないときは候補を見せるか、Sighted のクエリ画面で確かめてもらう（クエリの詳細画面のアドレス（「画面の URL」の表）を貼ってもらえば ID が分かる。WS は `list_workspaces` の結果と突き合わせる）。
 5. 同じ種類の接続が複数あると、データのツールが `error_code: connection_selection_required` と候補（`details`）を返す。候補を見せて**利用者に選んでもらい**、`connection_id` を付けて連携先ごとに 1 回ずつ呼び直す。
 
 ## 3. データの取り方
@@ -65,6 +65,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
 | 知りたいこと | ツール |
 | --- | --- |
 | AI の回答での露出（AEO の計測結果） | `get_query_results`（クエリ・エンジンごとの回答。`status` が `completed` 以外は失敗かスキップ）、`get_query_trends`（日ごとの言及数・引用数。エラーなら `get_query_results` を使う） |
+| 質問（クエリ）の探索 | `list_queries`（`search` は質問本文の部分一致。分析の入口。探してから既存の回答を `get_query_results` で読む） |
 | AI エンジンの一覧 | `list_platforms` |
 | 実行の履歴 | `list_execution_jobs`、`get_execution_job` |
 | つながっている連携と最終更新 | `list_connections`（`last_synced_at`） |
@@ -82,7 +83,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
   - GA4: `users`・`engagement_rate` は日ごとの値で、期間では合計しない。
   - Facebook・Instagram の投稿の値は公開からの累積（`as_of` の時点）で、日ごとに足さない。`delta` は指定した期間の伸びではなく、最新 2 回の観測の差（`from` から `to` までの `span_days` 日分。観測が 1 回の指標は `delta` に出ない）。答えには `from`・`to` を書き、「先月の伸び」などと言い換えない。期間の伸びが要るときは、`get_metrics` の投稿ごとの観測（累積値）の差で見て、使った観測日を書く。
   - Meta 広告: `meta_ads_daily_stats`・`meta_ads_by_ad` の `ctr` は 0〜1 の比率（2% は 0.02）。`get_metrics` の `meta.ads.ctr` は Meta の百分率のまま（2% は 2.0）で、`metric_unit` の表示とは合わない。単位は `metric_unit` だけで決めない。`reach`・`frequency` は期間で合計しない。
-- AEO: `get_query_results` の `raw` は AI の回答そのもの。回答から数え直した言及・引用は Sighted の画面の数字と一致しないことがあるので「回答から数えた参考値」と書く。Sighted のダッシュボードの指標は、定期実行（`execution_type: scheduled`）で成功した結果だけを数えている。
+- AEO: 質問を `list_queries` で探し、既存の回答を `get_query_results` で読むところから始める。競合・紹介理由・施策の判断では `raw` の確認を必須にする（本文・引用の読み方は `sighted-aeo-measure`）。`get_query_results` の `raw` は AI の回答そのもの。回答から数え直した言及・引用は Sighted の画面の数字と一致しないことがあるので「回答から数えた参考値」と書く。Sighted のダッシュボードの指標は、定期実行（`execution_type: scheduled`）で成功した結果だけを数えている。
 - 連携はあるがデータが 0 件なら、エラーではなく「まだデータが無い」と伝える。
 
 ## 5. 実行の前の確認（必ず守る）
@@ -125,7 +126,7 @@ Sighted の画面を案内するときに使う完全な URL。**本番に変わ
 
 ## 7. クエリの管理（追加・変更・削除）
 
-- 対象のクエリを探すには `list_queries(workspace_id)` を使う。`limit`・`offset`・`is_active`・`platform_id`・`search` で絞れる（既定 20・最大 100 件、`has_more` が `true` なら次ページ）。返る `id` をそのまま `run_query`・`update_query`・`preview_query_deletion`・`delete_query` の `query_id` に使う。
+- 対象のクエリを探すには `list_queries(workspace_id)` を使う。`limit`・`offset`・`is_active`・`platform_id`・`search` で絞れる（既定 20・最大 100 件、`has_more` が `true` なら次ページ）。返る `id` をそのまま `get_query_results`・`run_query`・`update_query`・`preview_query_deletion`・`delete_query` の `query_id` に使う。
 - `create_query(workspace_id, query, platform_ids, memo="")` で質問を1件追加する。追加しただけでは実行されず、次回実行日は翌日。追加自体にクレジットは使わない。失敗や応答が無いときも自動で再送しない（同じ質問のクエリが重複して作られる）。結果は `list_queries` で確かめる。
 - **質問の本文は追加後は変えられない**（MCP でも Sighted の画面でも）。変えたいときは新しく `create_query` で作る。
 - **メモ・頻度は MCP からは変えられない**（`create_query` に頻度の引数は無く、追加したクエリの頻度は毎日になる）。変えたいときは Sighted のクエリ画面で変更してもらう。
