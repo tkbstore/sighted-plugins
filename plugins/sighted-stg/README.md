@@ -21,8 +21,8 @@ Claude Code では、Sighted のアカウントが無ければ先に https://stg
 
 ```text
 Sighted を使えるようにして。次を実行してから、/reload-plugins → /sighted-stg:sighted-setup の順で打つよう伝えて（この会話でもう sighted-setup が使えるなら、それに従ってそのまま進めて）。
-claude plugin marketplace add tkbstore/sighted-plugins
-claude plugin install sighted-stg@sighted --scope user
+claude plugin marketplace add tkbstore/sighted-plugins-stg
+claude plugin install sighted-stg@sighted-stg --scope user
 ```
 
 `/reload-plugins` が保留になったら `/reload-plugins --force` を打ってください。

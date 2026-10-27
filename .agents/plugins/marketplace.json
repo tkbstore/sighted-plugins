@@ -1,7 +1,7 @@
 {
-  "name": "sighted",
+  "name": "sighted-stg",
   "interface": {
-    "displayName": "Sighted"
+    "displayName": "Sighted (stg)"
   },
   "plugins": [
     {

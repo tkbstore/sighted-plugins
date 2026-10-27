@@ -1,6 +1,6 @@
 {
-  "name": "sighted",
-  "description": "Sighted を Claude で使うためのプラグイン",
+  "name": "sighted-stg",
+  "description": "Sighted ステージング環境を Claude で使うためのプラグイン",
   "owner": {
     "name": "tkbstore"
   },
