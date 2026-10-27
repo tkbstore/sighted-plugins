@@ -1,6 +1,8 @@
-# sighted-plugins
+# sighted-plugins-stg
 
 Sighted plugins for AI agents (Claude / Codex)
+
+> このリポジトリは **stg（stg.sighted-aeo.com）用**です。本番用は [`tkbstore/sighted-plugin`](https://github.com/tkbstore/sighted-plugin) を使ってください。
 
 Sighted を AI エージェントから使うためのプラグインです。Claude 用と Codex 用のプラグインを置いています。ChatGPT はプラグインを使わず、[ChatGPT での追加手順](docs/chatgpt.md)で接続します。
 
@@ -13,12 +15,12 @@ Sighted を AI エージェントから使うためのプラグインです。Cl
 
 ## インストール
 
-このリポジトリは Claude と Codex のプラグインのマーケットプレイス（どちらも名前は `sighted`）です。
+このリポジトリは Claude と Codex のプラグインのマーケットプレイス（どちらも名前は `sighted-stg`）です。
 
 ### claude.ai・Claude デスクトップアプリ・Cowork
 
 1. **Customize > Plugins** を開きます。
-2. **Add > Add marketplace** で `tkbstore/sighted-plugins`（または `https://github.com/tkbstore/sighted-plugins`）を追加します。
+2. **Add > Add marketplace** で `tkbstore/sighted-plugins-stg`（または `https://github.com/tkbstore/sighted-plugins-stg`）を追加します。
 3. 一覧に出る **Sighted — Staging** を選んで追加します。
 4. プラグインを開き、**Connectors** タブで Sighted のコネクタを追加して接続します。ブラウザで Sighted にログインし、同意画面でワークスペースと連携先を選びます。client ID の入力は要りません。
 
@@ -33,8 +35,8 @@ Sighted のアカウントが無ければ、先に https://stg.sighted-aeo.com/s
 
 ```text
 Sighted を使えるようにして。次を実行してから、/reload-plugins → /sighted-stg:sighted-setup の順で打つよう伝えて（この会話でもう sighted-setup が使えるなら、それに従ってそのまま進めて）。
-claude plugin marketplace add tkbstore/sighted-plugins
-claude plugin install sighted-stg@sighted --scope user
+claude plugin marketplace add tkbstore/sighted-plugins-stg
+claude plugin install sighted-stg@sighted-stg --scope user
 ```
 
 - CLI でプラグインを入れた直後はそのセッションにまだ読み込まれていないため、`/reload-plugins` → `/sighted-stg:sighted-setup` の順に打つと `sighted-setup` skill の手順で接続まで案内されます。`/reload-plugins` が保留になったら `/reload-plugins --force` を打ってください。
@@ -48,8 +50,8 @@ Sighted のアカウントが無ければ、先に https://stg.sighted-aeo.com/s
 
 ```text
 Sighted の stg を使えるようにして。次を順に実行して。
-codex plugin marketplace add tkbstore/sighted-plugins
-codex plugin add sighted-stg@sighted
+codex plugin marketplace add tkbstore/sighted-plugins-stg
+codex plugin add sighted-stg@sighted-stg
 
 追加できたら、新しい Codex の会話を開いて
 「sighted-stg の sighted-setup に従って Sighted に接続して」
@@ -68,7 +70,7 @@ codex mcp login の実行は Codex が自分で行ってよい。ブラウザで
   approval_policy = "on-request"
   approvals_reviewer = "user"
 
-  [plugins."sighted-stg@sighted".mcp_servers.sighted-stg.tools.run_query]
+  [plugins."sighted-stg@sighted-stg".mcp_servers.sighted-stg.tools.run_query]
   approval_mode = "prompt"
   ```
 
@@ -86,6 +88,22 @@ ChatGPT ではプラグインを使わず、[`chatgpt.com/plugins`](https://chat
 ### Sighted のアカウントが無いとき
 
 接続のときのログイン画面から登録できます。登録・メールアドレスの確認・ワークスペースの作成が終わると、接続の同意画面に戻ります。途中で時間がかかって戻れなかったときは、使っている AI のアプリから接続し直してください。登録した内容は残っています。
+
+## 旧マーケットプレイス名 `sighted` から移行する
+
+以前の名前（`sighted`、旧リポジトリ名 `sighted-plugins`）で入れている場合は、先に外してから入れ直します。本番用の `sighted` と名前が衝突するためです。
+
+```bash
+# Claude Code
+claude plugin uninstall sighted-stg@sighted
+claude plugin marketplace remove sighted
+
+# Codex
+codex plugin remove sighted-stg@sighted
+codex plugin marketplace remove sighted
+```
+
+そのあと、上の手順で新しいマーケットプレイス（`sighted-stg`）を追加してください。Codex の `config.toml` に `plugins."sighted-stg@sighted"` の設定があれば、`sighted-stg@sighted-stg` に書き換えます。
 
 ## データの扱い
 

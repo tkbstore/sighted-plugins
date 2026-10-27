@@ -64,7 +64,7 @@ jobs:
           export CODEX_HOME="$RUNNER_TEMP/codex-home"
           mkdir -p "$CODEX_HOME"
           codex plugin marketplace add "$GITHUB_WORKSPACE"
-          codex plugin add sighted-stg@sighted
+          codex plugin add sighted-stg@sighted-stg
           codex mcp list --json > "$RUNNER_TEMP/mcp-list.json"
       - name: プラグインの MCP サーバーが登録されている
         run: |
